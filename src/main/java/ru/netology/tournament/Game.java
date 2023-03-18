@@ -1,21 +1,23 @@
 package ru.netology.tournament;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import ru.netology.sys.AlreadyRegisteredException;
 import ru.netology.sys.NotRegisteredException;
 import ru.netology.sys.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Game {
-  List<Player> allRegisteredPlayers = new ArrayList<>();
+  private List<Player> allRegisteredPlayers = new ArrayList<>();
 
   public void register(Player player) {
     if (!allRegisteredPlayers.contains(player)) {
       allRegisteredPlayers.add(player);
     } else {
-      throw new AlreadyRegisteredException("Player " + player + " already registered");
+      throw new AlreadyRegisteredException(
+              "Player " + player + " already registered"
+      );
     }
   }
 
@@ -31,7 +33,9 @@ public class Game {
     for (Player player : allRegisteredPlayers) {
       if (Objects.equals(player.getName(), playerName1)) {
         strength1 = player.getStrength();
-      } else if (Objects.equals(player.getName(), playerName2)) strenght2 = player.getStrength();
+      } else if (Objects.equals(player.getName(), playerName2)) {
+        strenght2 = player.getStrength();
+      }
     }
     if (strength1 != 0) {
       if (strenght2 != 0) {
@@ -41,10 +45,14 @@ public class Game {
           winnerIs = 2;
         }
       } else {
-        throw new NotRegisteredException(playerName2 + " is not registered");
+        throw new NotRegisteredException(
+                playerName2 + " is not registered"
+        );
       }
     } else {
-      throw new NotRegisteredException(playerName1 + " is not registered");
+      throw new NotRegisteredException(
+              playerName1 + " is not registered"
+      );
     }
     return winnerIs;
   }

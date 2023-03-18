@@ -63,7 +63,7 @@ class GameTest {
   }
 
   @Test
-  void roundNotRegisteredExeption1() {
+  void roundNotRegisteredException1() {
     game.register(player1);
     game.register(player2);
     Assertions.assertThrows(NotRegisteredException.class, () -> {
@@ -71,7 +71,7 @@ class GameTest {
     });
   }
   @Test
-  void roundNotRegisteredExeption2() {
+  void roundNotRegisteredException2() {
     game.register(player1);
     game.register(player2);
     Assertions.assertThrows(NotRegisteredException.class, () -> {
