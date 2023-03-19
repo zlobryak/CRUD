@@ -1,7 +1,7 @@
+
 package ru.netology.tournament;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Objects;
 import ru.netology.sys.AlreadyRegisteredException;
 import ru.netology.sys.NotRegisteredException;
@@ -9,11 +9,11 @@ import ru.netology.sys.Player;
 
 
 public class Game {
-  private List<Player> allRegisteredPlayers = new ArrayList<>();
-
+  //  private List<Player> allRegisteredPlayers = new ArrayList<>();
+  private HashMap<String, Integer> allRegisteredPlayers = new HashMap<>();
   public void register(Player player) {
-    if (!allRegisteredPlayers.contains(player)) {
-      allRegisteredPlayers.add(player);
+    if (!allRegisteredPlayers.containsKey(player.getName())) {
+      allRegisteredPlayers.put(player.getName(), player.getStrength());
     } else {
       throw new AlreadyRegisteredException(
               "Player " + player + " already registered"
@@ -21,8 +21,8 @@ public class Game {
     }
   }
 
-  public ArrayList<Player> findAll() {
-    return (ArrayList<Player>) allRegisteredPlayers;
+  public HashMap<String, Integer> findAll() {
+    return allRegisteredPlayers;
   }
 
   public int round(String playerName1, String playerName2) {
@@ -30,11 +30,11 @@ public class Game {
     int strength1 = 0;
     int strenght2 = 0;
 
-    for (Player player : allRegisteredPlayers) {
-      if (Objects.equals(player.getName(), playerName1)) {
-        strength1 = player.getStrength();
-      } else if (Objects.equals(player.getName(), playerName2)) {
-        strenght2 = player.getStrength();
+    for (String player : allRegisteredPlayers.keySet()) {
+      if (Objects.equals(player, playerName1)) {
+        strength1 = allRegisteredPlayers.get(player);
+      } else if (Objects.equals(player, playerName2)) {
+        strenght2 = allRegisteredPlayers.get(player);
       }
     }
     if (strength1 != 0) {

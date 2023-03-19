@@ -6,27 +6,27 @@ import org.junit.jupiter.api.Test;
 import ru.netology.sys.AlreadyRegisteredException;
 import ru.netology.sys.NotRegisteredException;
 import ru.netology.sys.Player;
+import java.util.HashMap;
 
-import java.util.ArrayList;
 class GameTest {
   Game game = new Game();
   Player player1 = new Player(1, "Player1", 10);
   Player player2 = new Player(2, "Player2", 100);
   Player player3 = new Player(3, "Player3", 10);
-  ArrayList<Player> AllPlayers = new ArrayList<>();
+  HashMap<String, Integer> AllPlayers = new HashMap<>();
 
   @BeforeEach
   public void setup() {
-    AllPlayers.add(player1);
-    AllPlayers.add(player2);
-    AllPlayers.add(player3);
+    AllPlayers.put(player1.getName(), player1.getStrength());
+    AllPlayers.put(player2.getName(), player2.getStrength());
+    AllPlayers.put(player3.getName(), player3.getStrength());
   }
   @Test
   void register() {
     game.register(player1);
     game.register(player2);
     game.register(player3);
-    ArrayList<Player> actual = game.findAll();
+    HashMap<String, Integer> actual = game.findAll();
     Assertions.assertTrue(AllPlayers.equals(actual));
   }
 
